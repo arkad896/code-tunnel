@@ -6,7 +6,7 @@ export const metadata: Metadata = {
   title: "Web Development Services in Kolkata — Code Tunnel",
   description: "Custom landing pages, React websites, and full-stack web apps built for businesses across India. No templates. Starting ₹24,999. Based in Kolkata.",
   alternates: {
-    canonical: "https://codetunnel.in/services",
+    canonical: "https://codetunnel.co.in/services",
   },
 };
 

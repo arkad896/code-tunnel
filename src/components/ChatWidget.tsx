@@ -87,7 +87,7 @@ export default function ChatWidget() {
           role: "model",
           parts: [
             {
-              text: "Sorry, I'm having trouble connecting right now. Please try again later or contact us at hello@codetunnel.in",
+              text: "Sorry, I'm having trouble connecting right now. Please try again later or contact us at hello@codetunnel.co.in",
             },
           ],
         },

@@ -24,8 +24,8 @@ const homepageJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   "name": "Code Tunnel",
-  "url": "https://codetunnel.in",
-  "logo": "https://codetunnel.in/logo.png",
+  "url": "https://codetunnel.co.in",
+  "logo": "https://codetunnel.co.in/logo.png",
   "description": "Custom web development agency based in Kolkata, India.",
   "address": {
     "@type": "PostalAddress",

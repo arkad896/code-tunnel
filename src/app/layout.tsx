@@ -8,15 +8,15 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://codetunnel.in"),
+  metadataBase: new URL("https://codetunnel.co.in"),
   title: "Code Tunnel — Custom Web Development Agency in Kolkata",
   description: "Code Tunnel builds modern, high-performance websites and web apps for businesses across India. Based in Kolkata. React, Node.js, SEO-ready.",
   alternates: {
-    canonical: "https://codetunnel.in",
+    canonical: "https://codetunnel.co.in",
   },
   openGraph: {
     type: "website",
-    url: "https://codetunnel.in",
+    url: "https://codetunnel.co.in",
     title: "Code Tunnel — Custom Web Development Agency in Kolkata",
     description: "Code Tunnel builds modern, high-performance websites and web apps for businesses across India. Based in Kolkata. React, Node.js, SEO-ready.",
     images: [
