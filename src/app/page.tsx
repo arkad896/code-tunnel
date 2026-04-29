@@ -2,8 +2,8 @@
 
 import React, { useState, useRef, useLayoutEffect, useEffect, useCallback } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { Check, Palette, LayoutDashboard, Megaphone, Search, Zap, Wrench } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Check, Palette, LayoutDashboard, Megaphone, Search, Zap, Wrench, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -85,16 +85,25 @@ function SkipLink() {
 function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [isDark, setIsDark] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
-      // Determine if we are in the dark section (Work/Services/About/Contact)
       setIsDark(window.scrollY > window.innerHeight * 0.85);
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Prevent scroll when mobile menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isOpen]);
 
   const navLinks = [
     { name: "Work", href: "/#work" },
@@ -106,32 +115,96 @@ function Navbar() {
   ];
 
   return (
-    <nav className={`fixed top-6 left-6 right-6 z-[100] transition-all duration-700 ${
-      scrolled 
-        ? "bg-white/5 backdrop-blur-2xl border border-white/10 py-4 px-8 rounded-2xl shadow-2xl" 
-        : "py-6 px-4 rounded-none"
-    }`}>
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="/" className="flex items-center group">
-          <img 
-            src="/logo.png" 
-            alt="Code Tunnel" 
-            className="h-12 w-auto transition-all duration-500 group-hover:scale-105" 
-            style={{ 
-              filter: isDark ? 'invert(1) hue-rotate(180deg)' : 'none' 
-            }}
-          />
-        </a>
-        <div className="hidden md:flex gap-10">
-          {navLinks.map(l => (
-            <a key={l.name} href={l.href} className={`text-xs font-black uppercase tracking-[0.2em] transition-colors duration-500 ${isDark ? 'text-white/50 hover:text-white' : 'text-zinc-900/50 hover:text-zinc-900'}`}>{l.name}</a>
-          ))}
+    <>
+      <nav className={`fixed top-6 left-6 right-6 z-[100] transition-all duration-700 ${
+        scrolled 
+          ? "bg-white/5 backdrop-blur-2xl border border-white/10 py-4 px-8 rounded-2xl shadow-2xl" 
+          : "py-6 px-4 rounded-none"
+      }`}>
+        <div className="max-w-7xl mx-auto flex items-center justify-between">
+          <a href="/" className="flex items-center group">
+            <img 
+              src="/logo.png" 
+              alt="Code Tunnel" 
+              className="h-12 w-auto transition-all duration-500 group-hover:scale-105" 
+              style={{ 
+                filter: isDark ? 'invert(1) hue-rotate(180deg)' : 'none' 
+              }}
+            />
+          </a>
+          <div className="hidden md:flex gap-10">
+            {navLinks.map(l => (
+              <a key={l.name} href={l.href} className={`text-xs font-black uppercase tracking-[0.2em] transition-colors duration-500 ${isDark ? 'text-white/50 hover:text-white' : 'text-zinc-900/50 hover:text-zinc-900'}`}>{l.name}</a>
+            ))}
+          </div>
+          <button 
+            onClick={() => setIsOpen(true)}
+            className={`md:hidden p-2 rounded-lg transition-colors ${isDark ? 'text-white' : 'text-zinc-900'}`}
+          >
+            <Menu className="w-6 h-6" />
+          </button>
         </div>
-        <button className={`md:hidden p-2 rounded-lg transition-colors ${isDark ? 'text-white' : 'text-zinc-900'}`}>
-          <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" /></svg>
-        </button>
-      </div>
-    </nav>
+      </nav>
+
+      {/* Mobile Menu Drawer */}
+      <AnimatePresence>
+        {isOpen && (
+          <div className="fixed inset-0 z-[200] md:hidden">
+            {/* Backdrop */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            />
+            
+            {/* Drawer Panel */}
+            <motion.div 
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="absolute top-0 left-0 bottom-0 w-[80%] max-w-sm bg-zinc-950 border-r border-white/10 p-8 flex flex-col shadow-2xl"
+            >
+              <div className="flex items-center justify-between mb-16">
+                <img src="/logo.png" alt="Code Tunnel" className="h-10 w-auto invert brightness-0" />
+                <button 
+                  onClick={() => setIsOpen(false)}
+                  className="p-2 text-white/50 hover:text-white transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              <div className="flex flex-col gap-8">
+                {navLinks.map((l, i) => (
+                  <motion.a
+                    key={l.name}
+                    href={l.href}
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: i * 0.1 }}
+                    onClick={() => setIsOpen(false)}
+                    className="text-2xl font-serif font-bold text-white/70 hover:text-white transition-colors"
+                  >
+                    {l.name}
+                  </motion.a>
+                ))}
+              </div>
+
+              <div className="mt-auto">
+                <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/20 mb-4">Socials</p>
+                <div className="flex gap-6">
+                  <a href="#" className="text-white/40 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors">Instagram</a>
+                  <a href="#" className="text-white/40 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors">LinkedIn</a>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+    </>
   );
 }
 
@@ -192,7 +265,7 @@ function Hero() {
         <FloatingPaths position={-1} />
       </div>
 
-      <div className="hero-content relative z-10 max-w-7xl mx-auto px-6 w-full text-center">
+      <div className="hero-content relative z-10 max-w-7xl mx-auto px-6 pt-[110px] w-full text-center">
         <p className="hero-eyebrow mb-12 text-xs font-black uppercase tracking-[0.5em] text-[#8b6f4f] opacity-0 translate-y-10">Digital Craft Studio</p>
         
         <h1 className="hero-title font-serif text-6xl md:text-[8rem] font-bold leading-[0.9] tracking-tighter text-[#201b16]">
@@ -214,7 +287,7 @@ function Hero() {
           Code Tunnel is a custom website design agency based in Kolkata, delivering premium digital infrastructure across India. We engineer optimized Next.js frameworks tailored to accelerate growing business outcomes.
         </p>
 
-        <div className="hero-cta mt-20 opacity-0 translate-y-10">
+        <div className="hero-cta mt-[25px] opacity-0 translate-y-10">
           <MagneticWrapper strength={0.12}>
             <div className="inline-block group relative bg-gradient-to-b from-black/5 to-white/5 p-px rounded-2xl backdrop-blur-lg overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
               <a 
@@ -234,7 +307,7 @@ function Hero() {
       </div>
       
       {/* Scroll Indicator */}
-      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
         <span className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-900/30 animate-pulse">Scroll</span>
       </div>
     </section>

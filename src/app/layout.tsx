@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { Suspense } from "react";
 import ChatWidget from "@/components/ChatWidget";
+import NavigationProgress from "@/components/NavigationProgress";
 
 export const viewport: Viewport = {
   themeColor: "#0a0a0a",
@@ -45,7 +46,12 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.googleapis.com" />
       </head>
       <body className="min-h-full flex flex-col">
-        {children}
+        <Suspense fallback={null}>
+          <NavigationProgress />
+        </Suspense>
+        <Suspense fallback={null}>
+          {children}
+        </Suspense>
         <Suspense fallback={null}>
           <ChatWidget />
         </Suspense>

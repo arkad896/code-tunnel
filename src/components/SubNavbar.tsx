@@ -1,9 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Menu, X } from "lucide-react";
 
 export default function SubNavbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -44,7 +47,62 @@ export default function SubNavbar() {
             </a>
           ))}
         </div>
+        <button 
+          onClick={() => setIsOpen(true)}
+          className="md:hidden p-2 rounded-lg transition-colors text-white"
+        >
+          <Menu className="w-6 h-6" />
+        </button>
       </div>
+
+      {/* Mobile Menu Drawer */}
+      <AnimatePresence>
+        {isOpen && (
+          <div className="fixed inset-0 z-[200]">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsOpen(false)}
+              className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            />
+            
+            <motion.div 
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="absolute top-0 left-0 bottom-0 w-[80%] max-w-sm bg-zinc-950 border-r border-white/10 p-8 flex flex-col shadow-2xl"
+            >
+              <div className="flex items-center justify-between mb-16">
+                <img src="/logo.png" alt="Code Tunnel" className="h-10 w-auto invert brightness-0" />
+                <button 
+                  onClick={() => setIsOpen(false)}
+                  className="p-2 text-white/50 hover:text-white transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+
+              <div className="flex flex-col gap-8">
+                {navLinks.map((l, i) => (
+                  <motion.a
+                    key={l.name}
+                    href={l.href}
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: i * 0.1 }}
+                    onClick={() => setIsOpen(false)}
+                    className="text-2xl font-serif font-bold text-white/70 hover:text-white transition-colors"
+                  >
+                    {l.name}
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

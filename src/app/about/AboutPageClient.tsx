@@ -78,12 +78,12 @@ export default function AboutPageClient({ professionalServiceSchema }: AboutPage
           className="mb-32 bg-white/[0.02] border border-white/10 rounded-3xl p-8 md:p-12 relative overflow-hidden group hover:border-[#8b6f4f]/30 transition-all duration-500"
           {...fadeInUp}
         >
-          <div className="absolute top-0 right-0 p-4">
-            <span className="text-[10px] font-black uppercase tracking-[0.2em] bg-[#8b6f4f] text-white px-3 py-1 rounded-sm">
-              Live & Ranking #1
-            </span>
-          </div>
           <div className="max-w-2xl">
+            <div className="mb-[30px]">
+              <span className="text-[10px] font-black uppercase tracking-[0.2em] bg-[#8b6f4f] text-white px-3 py-1 rounded-sm">
+                Live & Ranking #1
+              </span>
+            </div>
             <p className="text-xs font-black uppercase tracking-[0.4em] text-[#8b6f4f] mb-4">
               Featured Case Study
             </p>
