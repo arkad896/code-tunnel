@@ -116,7 +116,11 @@ export default function FilesShell({ deliverables, project }: FilesShellProps) {
 
               {/* Action */}
               <a
-                href={d.type === "file" ? (d.signedUrl ?? "#") : d.url}
+                href={
+                  d.type === "file" 
+                    ? (d.signedUrl ?? "#") 
+                    : (d.url.trim().toLowerCase().startsWith("javascript:") ? "#" : d.url)
+                }
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex-shrink-0 w-9 h-9 rounded-xl bg-zinc-100 flex items-center justify-center text-zinc-500 hover:bg-zinc-900 hover:text-white transition-colors"

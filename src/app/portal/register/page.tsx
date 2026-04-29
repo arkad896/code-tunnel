@@ -7,6 +7,17 @@ import { createClient } from "@/lib/supabase/client";
 type InviteStatus = "loading" | "valid" | "invalid" | "expired" | "no-token";
 
 import { Suspense } from "react";
+import { z } from "zod";
+
+const RegisterSchema = z.object({
+  fullName: z.string().min(1, "Full name is required"),
+  email: z.string().email("Invalid email address"),
+  password: z.string().min(8, "Password must be at least 8 characters"),
+  confirmPassword: z.string().min(8, "Confirm password must be at least 8 characters"),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords do not match.",
+  path: ["confirmPassword"],
+});
 
 function RegisterContent() {
   const router = useRouter();
@@ -67,13 +78,16 @@ function RegisterContent() {
     e.preventDefault();
     setError(null);
 
-    if (password !== confirmPassword) {
-      setError("Passwords do not match.");
-      return;
-    }
+    const result = RegisterSchema.safeParse({
+      fullName,
+      email,
+      password,
+      confirmPassword,
+    });
 
-    if (password.length < 8) {
-      setError("Password must be at least 8 characters.");
+    if (!result.success) {
+      const firstError = result.error.errors[0];
+      setError(firstError.message);
       return;
     }
 
@@ -254,6 +268,7 @@ function RegisterContent() {
               id="register-password"
               type="password"
               required
+              autoComplete="new-password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-900 text-sm placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-300 transition-all"
@@ -269,6 +284,7 @@ function RegisterContent() {
               id="register-confirm"
               type="password"
               required
+              autoComplete="new-password"
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               className="w-full px-4 py-3 rounded-xl border border-zinc-200 bg-zinc-50 text-zinc-900 text-sm placeholder:text-zinc-400 focus:outline-none focus:ring-2 focus:ring-zinc-900/10 focus:border-zinc-300 transition-all"

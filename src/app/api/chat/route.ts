@@ -1,8 +1,59 @@
 import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
+import { z } from "zod";
+
+const rateLimit = new Map<string, { count: number; reset: number }>();
+
+function checkRateLimit(userId: string): boolean {
+  const now = Date.now();
+  const entry = rateLimit.get(userId);
+  if (!entry || now > entry.reset) {
+    rateLimit.set(userId, { count: 1, reset: now + 60_000 });
+    return true;
+  }
+  if (entry.count >= 20) return false;
+  entry.count++;
+  return true;
+}
+
+const MessageSchema = z.object({
+  role: z.enum(["user", "model"]),
+  parts: z.array(z.object({ text: z.string().max(4000) })).min(1),
+});
+
+const ChatSchema = z.object({
+  messages: z.array(MessageSchema).min(1),
+});
 
 export async function POST(request: NextRequest) {
   try {
-    const { messages } = await request.json();
+    const supabase = await createClient();
+    const {
+      data: { user },
+      error: authError,
+    } = await supabase.auth.getUser();
+
+    if (authError || !user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    if (!checkRateLimit(user.id)) {
+      return NextResponse.json(
+        { error: "Too many requests" },
+        { status: 429, headers: { "Retry-After": "60" } }
+      );
+    }
+
+    const body = await request.json();
+    const parsed = ChatSchema.safeParse(body);
+    if (!parsed.success) {
+      return NextResponse.json(
+        { error: "Invalid input", details: parsed.error.flatten() },
+        { status: 400 }
+      );
+    }
+
+    const { messages } = parsed.data;
 
     const systemMessage = {
       role: "system",
@@ -29,23 +80,20 @@ export async function POST(request: NextRequest) {
     });
 
     if (!response.ok) {
-      const error = await response.text();
-      throw new Error(`Ollama API error: ${error}`);
+      const errorText = await response.text();
+      throw new Error(`Ollama API error: ${errorText}`);
     }
 
     const data = await response.json();
-    console.log("Ollama response:", JSON.stringify(data, null, 2));
-
-    // Ollama native format returns data.message.content
     const text = data.message?.content || data.choices?.[0]?.message?.content;
 
     if (!text) throw new Error("No response from model");
 
     return NextResponse.json({ text });
   } catch (error: any) {
-    console.error("Chat API error:", error);
+    console.error("[api-error]", error);
     return NextResponse.json(
-      { error: error.message || "Failed to fetch response" },
+      { error: "An unexpected error occurred" },
       { status: 500 }
     );
   }

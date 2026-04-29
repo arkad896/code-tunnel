@@ -12,3 +12,13 @@ export function createAdminClient() {
     }
   )
 }
+
+export async function auditLog(userId: string, action: string, details: string) {
+  const admin = createAdminClient();
+  await admin.from("audit_logs").insert({
+    user_id: userId,
+    action,
+    details,
+    ip_address: "0.0.0.0", // Optional fallback
+  });
+}
