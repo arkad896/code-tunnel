@@ -35,82 +35,198 @@ export default function AboutPage() {
   return (
     <>
       <SubNavbar />
-      <main className="min-h-screen bg-[#0a0a0a] text-white py-32 px-6 md:px-12">
+      <main className="min-h-screen bg-[#070707] text-white py-32 px-6 md:px-12 selection:bg-white selection:text-black">
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
         />
 
-        <div className="max-w-4xl mx-auto pt-20">
-          <h1 className="text-4xl md:text-6xl font-serif font-bold mb-12 tracking-tight">
-            Built in Kolkata. Focused on Results.
-          </h1>
-
-          <div className="space-y-8 text-lg text-white/70 leading-relaxed max-w-3xl mb-16">
-            <p>
-              Code Tunnel is an independent web development agency based in Kolkata, West Bengal. 
-              We build modern digital experiences for brands looking to establish a definitive edge. From startups in Bangalore to growing businesses in Mumbai, we deliver web software across India.
+        <div className="max-w-6xl mx-auto pt-20">
+          {/* Header */}
+          <div className="mb-24 border-b border-white/5 pb-16">
+            <p className="text-xs font-black uppercase tracking-[0.5em] text-white/30 mb-6">
+              CODE TUNNEL — CREDENTIALS · 2025
             </p>
-            <p>
-              We strictly do not use generic templates or shortcuts. We believe every brand deserves an online identity engineered specifically for them. We provide absolute transparency with developer-direct communication — cutting out standard corporate friction.
-            </p>
-            <p>
-              Our infrastructure leverages standard technologies to generate high-speed visual delivery. Relying on continuous improvement loops, our software maintains production resilience.
+            <h1 className="text-4xl md:text-7xl font-serif font-bold tracking-tight mb-8">
+              Digital Solutions Provider
+            </h1>
+            <p className="text-xl md:text-2xl text-white/70 max-w-3xl leading-relaxed font-light">
+              Building modern, high-performing, and conversion-driven web experiences for businesses that mean business.
             </p>
           </div>
 
-          <h2 className="text-3xl font-serif font-semibold mt-16 mb-8 border-b border-white/10 pb-4">
-            Why Businesses Choose Code Tunnel
-          </h2>
-
-          <div className="space-y-8 max-w-3xl mb-16">
+          {/* Who We Are */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-32">
             <div>
-              <h3 className="text-2xl font-serif font-medium text-white mb-3">
-                No Templates
-              </h3>
-              <p className="text-white/60 leading-relaxed">
-                Every site is designed and built from scratch for your brand. Stand out with a fully optimized identity.
+              <h2 className="text-xs font-black uppercase tracking-[0.4em] text-[#8b6f4f]">
+                ABOUT CODE TUNNEL
+              </h2>
+              <p className="text-xl font-serif font-semibold mt-2 text-white/90">
+                Who We Are
               </p>
             </div>
-            <div>
-              <h3 className="text-2xl font-serif font-medium text-white mb-3">
-                Direct Communication
-              </h3>
-              <p className="text-white/60 leading-relaxed">
-                You talk to the developer. No account managers, no middlemen. Faster iteration and better understanding.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-2xl font-serif font-medium text-white mb-3">
-                Business-First Thinking
-              </h3>
-              <p className="text-white/60 leading-relaxed">
-                We build for conversions, speed, and search visibility — not just aesthetics. Real digital equity that serves bottom-line goals.
+            <div className="md:col-span-2">
+              <p className="text-lg text-white/60 leading-relaxed">
+                Code Tunnel is a digital solutions provider focused on building modern, high-performing, and conversion-driven web experiences for growing businesses. We combine strategic thinking with technical execution to deliver websites and digital systems that are not only visually refined but also aligned with real business goals — customer acquisition, engagement, and scalability.
               </p>
             </div>
           </div>
 
-          <h2 className="text-3xl font-serif font-semibold mt-16 mb-6 border-b border-white/10 pb-4">
-            Our Stack
-          </h2>
-          <p className="text-white/60 text-lg leading-relaxed max-w-3xl mb-12">
-            We use hardened, industry-standard modern web primitives. Our implementations rely heavily on <strong className="text-white">React</strong>, <strong className="text-white">Next.js</strong>, <strong className="text-white">Node.js</strong>, and <strong className="text-white">TypeScript</strong> deployed over global architectures like Vercel.
-          </p>
+          {/* How We Work */}
+          <div className="mb-32">
+            <div className="mb-16">
+              <h2 className="text-xs font-black uppercase tracking-[0.4em] text-[#8b6f4f]">
+                WORKING APPROACH
+              </h2>
+              <p className="text-2xl md:text-4xl font-serif font-bold mt-2">
+                How We Work
+              </p>
+            </div>
 
-          <div className="flex flex-col md:flex-row items-center gap-6 mt-16 border-t border-white/10 pt-12">
-            <a
-              href="/services"
-              className="text-white hover:text-white/80 font-bold tracking-wider text-sm border-b border-white/30 pb-1"
-            >
-              See our web development services
-            </a>
-            <span className="hidden md:block text-white/30">|</span>
-            <a
-              href="/contact"
-              className="text-white hover:text-white/80 font-bold tracking-wider text-sm border-b border-white/30 pb-1"
-            >
-              Start a project with us
-            </a>
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-6">
+              {[
+                {
+                  num: "01",
+                  title: "Brand Understanding",
+                  desc: "Business goals, audience behaviour, and brand identity are analysed before execution begins.",
+                },
+                {
+                  num: "02",
+                  title: "Strategic Structuring",
+                  desc: "Website architecture, content flow, and user journey are planned with clarity and precision.",
+                },
+                {
+                  num: "03",
+                  title: "Design & Development",
+                  desc: "Modern, responsive, and performance-driven interfaces are crafted to reflect the brand.",
+                },
+                {
+                  num: "04",
+                  title: "Optimisation",
+                  desc: "Speed, usability, and foundational SEO best practices are implemented throughout.",
+                },
+                {
+                  num: "05",
+                  title: "Delivery & Scalability",
+                  desc: "Thorough testing, smooth deployment, and future scalability are ensured before handoff.",
+                },
+              ].map((step, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group"
+                >
+                  <span className="text-4xl font-serif font-black text-white/10 group-hover:text-[#8b6f4f] transition-colors duration-300 block mb-6">
+                    {step.num}
+                  </span>
+                  <h3 className="text-sm font-black uppercase tracking-widest text-white mb-3">
+                    {step.title}
+                  </h3>
+                  <p className="text-xs text-white/50 leading-relaxed">
+                    {step.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Industry Exposure */}
+          <div className="mb-32">
+            <div className="mb-12 border-b border-white/5 pb-10">
+              <h2 className="text-xs font-black uppercase tracking-[0.4em] text-[#8b6f4f]">
+                CLIENT EXPERIENCE & EXPOSURE
+              </h2>
+              <p className="text-2xl md:text-4xl font-serif font-bold mt-2 mb-6">
+                Industry Exposure
+              </p>
+              <p className="text-white/50 text-sm max-w-3xl leading-relaxed">
+                Code Tunnel has been involved in a range of projects across multiple industries, contributing to structured digital solutions, system-based interfaces, and business-oriented platforms. The experience includes work aligned with enterprise-level environments and globally recognised operational standards.
+              </p>
+              <div className="mt-4 bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[10px] uppercase tracking-widest text-white/40 max-w-fit">
+                <span className="text-[#8b6f4f] font-black mr-2">NOTE:</span>
+                Specific project materials are not shared publicly due to confidentiality agreements.
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Training & Process Systems",
+                  client: "Unilever Europe",
+                  desc: "Business training systems and process visualisation frameworks, including structured problem-solving models such as the Ishikawa (fishbone) approach.",
+                },
+                {
+                  title: "Product & Category Interfaces",
+                  client: "Global FMCG Brands",
+                  desc: "Product-focused digital structuring and category-based interface systems aligned with global consumer goods operations.",
+                },
+                {
+                  title: "Safety & Operational Interfaces",
+                  client: "Aviation & Engineering",
+                  desc: "Safety-focused and operational interface concepts inspired by world-class engineering environments in the aviation sector.",
+                },
+                {
+                  title: "Data, Analytics & Logistics",
+                  client: "Royal Mail-Level Operations",
+                  desc: "Data structuring, analytics workflows, and logistics-oriented systems comparable to large-scale postal and delivery operations.",
+                },
+                {
+                  title: "Communication & Initiative Systems",
+                  client: "International NGO Sector",
+                  desc: "Structured communication systems and digital initiatives aligned with internationally recognised humanitarian organisations.",
+                },
+                {
+                  title: "Brand & Web Experiences",
+                  client: "Emerging Brands",
+                  desc: "Complete web presence and immersive brand experience development for growing businesses across multiple verticals.",
+                },
+              ].map((item, idx) => (
+                <div
+                  key={idx}
+                  className="bg-white/[0.02] border border-white/5 rounded-3xl p-8 hover:bg-white/5 hover:border-white/10 transition-all duration-500 flex flex-col justify-between"
+                >
+                  <div>
+                    <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#8b6f4f] block mb-3">
+                      {item.client}
+                    </span>
+                    <h3 className="text-xl font-serif font-bold text-white mb-4">
+                      {item.title}
+                    </h3>
+                  </div>
+                  <p className="text-sm text-white/50 leading-relaxed font-light mt-auto">
+                    {item.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Get In Touch */}
+          <div className="bg-gradient-to-b from-white/5 to-transparent border border-white/10 rounded-[2rem] p-12 md:p-20 text-center relative overflow-hidden">
+            <h2 className="text-3xl md:text-5xl font-serif font-bold mb-6">
+              Let&apos;s Build Something Great.
+            </h2>
+            <p className="text-white/60 text-lg max-w-xl mx-auto leading-relaxed mb-12">
+              Code Tunnel focuses on building not just websites, but complete digital experiences that help businesses establish a strong and credible online presence.
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-3xl mx-auto border-t border-white/10 pt-12 text-left md:text-center text-xs uppercase font-black tracking-widest text-white/40">
+              <div>
+                <span className="text-white/20 block mb-2">Website</span>
+                <a href="https://codetunnel.in" className="text-white hover:text-[#8b6f4f] transition-colors">codetunnel.in</a>
+              </div>
+              <div>
+                <span className="text-white/20 block mb-2">Location</span>
+                <span className="text-white">Kolkata, India</span>
+              </div>
+              <div>
+                <span className="text-white/20 block mb-2">Focus</span>
+                <span className="text-white">Web Design & Development</span>
+              </div>
+            </div>
+
+            <p className="mt-16 text-sm italic font-serif text-white/60 max-w-2xl mx-auto border-t border-white/5 pt-8">
+              &ldquo;Every solution is tailored specifically to the client&apos;s brand — clarity, usability, measurable impact.&rdquo;
+            </p>
           </div>
         </div>
       </main>

@@ -1193,9 +1193,17 @@ export default function Home() {
         
         {/* Minimal About Bridge */}
         <section id="about" className="relative py-40 px-6 z-10 text-center">
-           <div className="max-w-2xl mx-auto">
-             <p className="text-xs font-black uppercase tracking-[0.5em] text-white/30 mb-8">Our Philosophy</p>
-             <p className="font-serif text-3xl md:text-5xl text-white leading-tight">We build digital artifacts that stand as monuments to craft, intention, and the beauty of the void.</p>
+           <div className="max-w-3xl mx-auto">
+             <p className="text-xs font-black uppercase tracking-[0.5em] text-[#8b6f4f] mb-8">Who We Are</p>
+             <p className="font-serif text-3xl md:text-5xl text-white leading-tight mb-10">
+               We build modern, high-performing, and conversion-driven web experiences for businesses that mean business.
+             </p>
+             <a 
+               href="/about" 
+               className="inline-block text-xs font-black uppercase tracking-[0.3em] text-white/40 hover:text-white border-b border-white/20 hover:border-white pb-1 transition-all"
+             >
+               View Our Credentials &rarr;
+             </a>
            </div>
         </section>
 
