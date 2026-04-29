@@ -201,11 +201,12 @@ function RegisterContent() {
     <div className="min-h-screen flex items-center justify-center px-6">
       <div className="w-full max-w-md">
         {/* Logo */}
-        <div className="flex items-center gap-3 mb-16">
-          <div className="w-10 h-10 bg-zinc-900 rounded-xl flex items-center justify-center">
-            <span className="text-white text-sm font-black tracking-tight">CT</span>
-          </div>
-          <span className="text-lg font-bold tracking-tight text-zinc-900">Code Tunnel</span>
+        <div className="flex items-center mb-16">
+          <img 
+            src="/logo.png" 
+            alt="Code Tunnel" 
+            className="h-12 w-auto" 
+          />
         </div>
 
         {/* Heading */}

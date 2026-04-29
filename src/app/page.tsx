@@ -112,9 +112,15 @@ function Navbar() {
         : "py-6 px-4 rounded-none"
     }`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-zinc-900 flex items-center justify-center font-serif font-bold text-white transition-transform group-hover:rotate-6">CT</div>
-          <span className={`font-serif text-2xl font-bold tracking-tight transition-colors duration-500 ${isDark ? 'text-white' : 'text-zinc-900'}`}>Code Tunnel</span>
+        <a href="/" className="flex items-center group">
+          <img 
+            src="/logo.png" 
+            alt="Code Tunnel" 
+            className="h-12 w-auto transition-all duration-500 group-hover:scale-105" 
+            style={{ 
+              filter: isDark ? 'invert(1) hue-rotate(180deg)' : 'none' 
+            }}
+          />
         </a>
         <div className="hidden md:flex gap-10">
           {navLinks.map(l => (
@@ -1214,7 +1220,12 @@ export default function Home() {
       <footer className="relative py-20 px-8 z-10 border-t border-white/5 bg-transparent">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 opacity-30 text-[10px] font-black uppercase tracking-[0.5em] text-white">
           <div className="flex items-center gap-4">
-            <div className="w-6 h-6 rounded-lg bg-white/20" />
+            <img 
+              src="/logo.png" 
+              alt="Code Tunnel" 
+              className="h-6 w-auto" 
+              style={{ filter: 'invert(1) hue-rotate(180deg)' }}
+            />
             <span>Code Tunnel &bull; 2026</span>
           </div>
           <div className="flex gap-10">

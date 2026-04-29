@@ -29,9 +29,13 @@ export default function SubNavbar() {
         : "py-6 px-4 rounded-none"
     }`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        <a href="/" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center font-serif font-bold text-black transition-transform group-hover:rotate-6">CT</div>
-          <span className="font-serif text-2xl font-bold tracking-tight text-white">Code Tunnel</span>
+        <a href="/" className="flex items-center group">
+          <img 
+            src="/logo.png" 
+            alt="Code Tunnel" 
+            className="h-12 w-auto transition-transform group-hover:scale-105" 
+            style={{ filter: 'invert(1) hue-rotate(180deg)' }}
+          />
         </a>
         <div className="hidden md:flex gap-10">
           {navLinks.map(l => (

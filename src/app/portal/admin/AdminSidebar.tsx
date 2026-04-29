@@ -36,11 +36,12 @@ export default function AdminSidebar({ userName, userEmail }: AdminSidebarProps)
     <aside className="w-64 bg-white border-r border-zinc-200 flex flex-col fixed inset-y-0 left-0 z-30">
       {/* Logo */}
       <div className="px-6 py-6 border-b border-zinc-100">
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 bg-zinc-900 rounded-xl flex items-center justify-center">
-            <span className="text-white text-xs font-black tracking-tight">CT</span>
-          </div>
-          <span className="text-base font-bold tracking-tight text-zinc-900">Code Tunnel</span>
+        <div className="flex items-center">
+          <img 
+            src="/logo.png" 
+            alt="Code Tunnel" 
+            className="h-10 w-auto" 
+          />
         </div>
         <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mt-2 block">
           Admin Panel
