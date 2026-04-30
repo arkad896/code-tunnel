@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://codetunnel.co.in/sitemap.xml

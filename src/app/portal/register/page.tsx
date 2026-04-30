@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -216,9 +217,9 @@ function RegisterContent() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="flex items-center mb-16">
-          <img 
+          <Image 
             src="/logo.png" 
-            alt="Code Tunnel" 
+            alt="Code Tunnel" width={200} height={50} 
             className="h-12 w-auto" 
           />
         </div>

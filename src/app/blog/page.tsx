@@ -12,17 +12,6 @@ export const metadata: Metadata = {
 };
 
 export default function BlogPage() {
-  const blogSchema = {
-    "@context": "https://schema.org",
-    "@type": "Blog",
-    "name": "Code Tunnel Web Development Blog",
-    "description": "Expert digital insights on web design, Next.js tech scaling, and search presence from Code Tunnel Kolkata.",
-    "publisher": {
-      "@type": "ProfessionalService",
-      "name": "Code Tunnel"
-    }
-  };
-
   const posts = [
     {
       title: "Why Your Kolkata Business Needs a Custom Website in 2026",
@@ -40,6 +29,27 @@ export default function BlogPage() {
       keyword: "SEO mistakes small business website",
     }
   ];
+
+  const blogSchema = {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "Code Tunnel Web Development Blog",
+    "description": "Expert digital insights on web design, Next.js tech scaling, and search presence from Code Tunnel Kolkata.",
+    "publisher": {
+      "@type": "ProfessionalService",
+      "name": "Code Tunnel"
+    },
+    "blogPost": posts.map(post => ({
+      "@type": "BlogPosting",
+      "headline": post.title,
+      "description": post.excerpt,
+      "keywords": post.keyword,
+      "author": {
+        "@type": "Organization",
+        "name": "Code Tunnel"
+      }
+    }))
+  };
 
   return (
     <>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
 
@@ -18,7 +19,7 @@ export default function Loading() {
           }}
           className="relative z-10"
         >
-          <img src="/logo.png" alt="Loading..." className="h-16 w-auto invert brightness-0" />
+          <Image src="/logo.png" alt="Loading..." width={200} height={50} className="h-16 w-auto invert brightness-0" />
         </motion.div>
         
         {/* Pulsing ring */}

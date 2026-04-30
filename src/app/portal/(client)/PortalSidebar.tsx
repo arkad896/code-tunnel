@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -39,9 +40,9 @@ export default function PortalSidebar({ clientName, userEmail }: PortalSidebarPr
     <aside className="w-64 bg-white border-r border-zinc-200 flex flex-col fixed inset-y-0 left-0 z-30">
       {/* Logo */}
       <div className="flex items-center px-6 py-6 border-b border-zinc-100">
-        <img 
+        <Image 
           src="/logo.png" 
-          alt="Code Tunnel" 
+          alt="Code Tunnel" width={200} height={50} 
           className="h-10 w-auto" 
         />
       </div>

@@ -4,8 +4,8 @@ import SubFooter from "@/components/SubFooter";
 import AboutPageClient from "./AboutPageClient";
 
 export const metadata: Metadata = {
-  title: "About Code Tunnel — Custom Web Development Agency in Kolkata",
-  description: "Code Tunnel is a Kolkata-based web development agency. Custom-built websites, no templates, developer-direct communication. Serving businesses across India.",
+  title: "About Code Tunnel — Frontend Architecture & Custom Web Agency",
+  description: "Code Tunnel is a Kolkata-based custom web agency specializing in frontend architecture, modern UX/UI design, and scalable Next.js development. No templates, strictly bespoke.",
   alternates: {
     canonical: "https://codetunnel.co.in/about",
   },

@@ -98,9 +98,9 @@ function Navbar() {
       }`}>
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           <a href="/" className="flex items-center group">
-            <img 
+            <Image 
               src="/logo.png" 
-              alt="Code Tunnel" 
+              alt="Code Tunnel" width={200} height={50} 
               className="h-12 w-auto transition-all duration-500 group-hover:scale-105" 
               style={{ 
                 filter: isDark ? 'invert(1) hue-rotate(180deg)' : 'none' 
@@ -143,7 +143,7 @@ function Navbar() {
               className="absolute top-0 left-0 bottom-0 w-[80%] max-w-sm bg-zinc-950 border-r border-white/10 p-8 flex flex-col shadow-2xl"
             >
               <div className="flex items-center justify-between mb-16">
-                <img src="/logo.png" alt="Code Tunnel" className="h-10 w-auto invert brightness-0" />
+                <Image src="/logo.png" alt="Code Tunnel" width={200} height={50} className="h-10 w-auto invert brightness-0" />
                 <button 
                   onClick={() => setIsOpen(false)}
                   className="p-2 text-white/50 hover:text-white transition-colors"
@@ -171,8 +171,8 @@ function Navbar() {
               <div className="mt-auto">
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/20 mb-4">Socials</p>
                 <div className="flex gap-6">
-                  <a href="#" className="text-white/40 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors">Instagram</a>
-                  <a href="#" className="text-white/40 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors">LinkedIn</a>
+                  <a href="https://linkedin.com/company/code-tunnel" className="text-white/40 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors">Instagram</a>
+                  <a href="https://linkedin.com/company/code-tunnel" className="text-white/40 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors">LinkedIn</a>
                 </div>
               </div>
             </motion.div>
@@ -217,7 +217,7 @@ function FloatingPaths({ position }: { position: number }) {
               pathOffset: [0, 1, 0],
             }}
             transition={{
-              duration: 25 + Math.random() * 10,
+              duration: 25 + (path.id % 10),
               repeat: Infinity,
               ease: "linear",
             }}
@@ -1220,7 +1220,7 @@ export default function Home() {
         className="fixed inset-0 z-0 bg-[#F7F4EF] will-change-opacity pointer-events-none" 
       />
 
-      <SEO jsonLd={homepageJsonLd} />
+
       <Navbar />
       <main id="main-content" className="relative z-10">
         <Hero />
@@ -1229,10 +1229,10 @@ export default function Home() {
         {/* Cinematic Bridge Section */}
         <section ref={bridgeRef} className="relative py-60 px-6 overflow-hidden z-10">
           <div className="max-w-7xl mx-auto text-center">
-            <h2 className="font-serif text-5xl md:text-[10rem] font-bold text-white leading-none tracking-tighter mb-16">
+            <div className="font-serif text-5xl md:text-[10rem] font-bold text-white leading-none tracking-tighter mb-16">
               <div ref={infiniteRef} className="will-change-transform will-change-opacity">Infinite.</div>
               <span ref={possibleRef} className="italic text-white/30 block will-change-transform will-change-opacity">Possible.</span>
-            </h2>
+            </div>
             <div className="flex justify-center">
                <div ref={lineRef} className="w-1 h-32 bg-gradient-to-b from-white to-transparent opacity-20 origin-top will-change-transform will-change-opacity" />
             </div>
@@ -1279,18 +1279,18 @@ export default function Home() {
       <footer className="relative py-20 px-8 z-10 border-t border-white/5 bg-transparent">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 opacity-30 text-[10px] font-black uppercase tracking-[0.5em] text-white">
           <div className="flex items-center gap-4">
-            <img 
+            <Image 
               src="/logo.png" 
-              alt="Code Tunnel" 
+              alt="Code Tunnel" width={200} height={50} 
               className="h-6 w-auto" 
               style={{ filter: 'invert(1) hue-rotate(180deg)' }}
             />
             <span>Code Tunnel &bull; 2026</span>
           </div>
           <div className="flex gap-10">
-            <a href="#" className="hover:text-white transition-colors">Twitter</a>
-            <a href="#" className="hover:text-white transition-colors">LinkedIn</a>
-            <a href="#" className="hover:text-white transition-colors">Dribbble</a>
+            <a href="https://linkedin.com/company/code-tunnel" className="hover:text-white transition-colors">Twitter</a>
+            <a href="https://linkedin.com/company/code-tunnel" className="hover:text-white transition-colors">LinkedIn</a>
+            <a href="https://linkedin.com/company/code-tunnel" className="hover:text-white transition-colors">Dribbble</a>
           </div>
           <p>Architected in the Void</p>
         </div>

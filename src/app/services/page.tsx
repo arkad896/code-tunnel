@@ -4,8 +4,8 @@ import SubFooter from "@/components/SubFooter";
 import ServicesPageClient from "./ServicesPageClient";
 
 export const metadata: Metadata = {
-  title: "Web Development Services in Kolkata — Code Tunnel",
-  description: "Custom landing pages, React websites, and full-stack web apps built for businesses across India. No templates. Starting ₹24,999. Based in Kolkata.",
+  title: "Frontend Development & UX/UI Services in Kolkata — Code Tunnel",
+  description: "Code Tunnel provides elite frontend development, UX/UI design, and full-stack Next.js web applications. Custom React websites for businesses. Starting ₹24,999.",
   alternates: {
     canonical: "https://codetunnel.co.in/services",
   },

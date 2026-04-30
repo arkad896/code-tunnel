@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
@@ -74,9 +75,9 @@ export default function LoginPage() {
       <div className="w-full max-w-md">
         {/* Logo */}
         <div className="flex items-center mb-16">
-          <img 
+          <Image 
             src="/logo.png" 
-            alt="Code Tunnel" 
+            alt="Code Tunnel" width={200} height={50} 
             className="h-12 w-auto" 
           />
         </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
@@ -33,9 +34,9 @@ export default function SubNavbar() {
     }`}>
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <a href="/" className="flex items-center group">
-          <img 
+          <Image 
             src="/logo.png" 
-            alt="Code Tunnel" 
+            alt="Code Tunnel" width={200} height={50} 
             className="h-12 w-auto transition-transform group-hover:scale-105" 
             style={{ filter: 'invert(1) hue-rotate(180deg)' }}
           />
@@ -75,7 +76,7 @@ export default function SubNavbar() {
               className="absolute top-0 left-0 bottom-0 w-[80%] max-w-sm bg-zinc-950 border-r border-white/10 p-8 flex flex-col shadow-2xl"
             >
               <div className="flex items-center justify-between mb-16">
-                <img src="/logo.png" alt="Code Tunnel" className="h-10 w-auto invert brightness-0" />
+                <Image src="/logo.png" alt="Code Tunnel" width={200} height={50} className="h-10 w-auto invert brightness-0" />
                 <button 
                   onClick={() => setIsOpen(false)}
                   className="p-2 text-white/50 hover:text-white transition-colors"
