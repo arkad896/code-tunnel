@@ -8,6 +8,8 @@ import {
   Plus,
 } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 function statusColor(status: string): { bg: string; text: string; dot: string } {
   switch (status?.toLowerCase()) {
     case "planning":

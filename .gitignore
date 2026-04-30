@@ -45,3 +45,4 @@ settings.json
 
 # logs
 *.log
+.env*.local

@@ -66,7 +66,12 @@ export async function POST(request: NextRequest) {
       content: m.parts[0].text,
     }));
 
-    const response = await fetch(process.env.OLLAMA_API_URL!, {
+    const apiUrl = process.env.OLLAMA_API_URL;
+    if (!apiUrl) {
+      throw new Error("OLLAMA_API_URL is not defined in environment variables");
+    }
+
+    const response = await fetch(apiUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
