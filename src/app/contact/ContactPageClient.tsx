@@ -17,10 +17,10 @@ export default function ContactPageClient() {
         </p>
         <div className="flex flex-col items-center gap-4">
           <a 
-            href="mailto:hello@codetunnel.co.in" 
+            href="mailto:hello&#64;codetunnel&#46;co&#46;in" 
             className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black rounded-xl font-bold uppercase text-xs tracking-widest hover:bg-white/90 transition-all shadow-xl"
           >
-            Email hello@codetunnel.co.in
+            Email hello&#64;codetunnel&#46;co&#46;in
           </a>
           <a 
             href="/" 

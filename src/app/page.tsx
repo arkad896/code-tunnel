@@ -14,31 +14,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
  * Bridges a light Hero section to a deep dark Work/Services section with cinematic transitions.
  */
 
-import SEO from "@/components/SEO";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
-
-const homepageJsonLd = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "name": "Code Tunnel",
-  "url": "https://codetunnel.co.in",
-  "logo": "https://codetunnel.co.in/logo.png",
-  "description": "Custom web development agency based in Kolkata, India.",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Kolkata",
-    "addressRegion": "West Bengal",
-    "addressCountry": "IN"
-  },
-  "sameAs": [
-    "https://instagram.com/codetunnel",
-    "https://linkedin.com/company/codetunnel"
-  ]
-};
-
 // ─── Shared Components ───────────────────────────────────────────────────────
 
 function MagneticWrapper({ children, strength = 0.2, className = "" }: { children: React.ReactNode; strength?: number; className?: string }) {
@@ -211,7 +186,7 @@ function Hero() {
         </h1>
         
         <p className="hero-subtext mt-8 text-lg text-zinc-900/60 max-w-2xl mx-auto opacity-0 translate-y-10">
-          Code Tunnel is a custom website design agency based in Kolkata, delivering premium digital infrastructure across India. We engineer optimized Next.js frameworks tailored to accelerate growing business outcomes.
+          Code Tunnel is a custom <strong>web development agency in Kolkata</strong>, delivering premium digital infrastructure across India. We engineer optimized Next.js frameworks and professional SEO strategies tailored to accelerate growing business outcomes.
         </p>
 
         <div className="hero-cta mt-20 opacity-0 translate-y-10">
@@ -555,8 +530,8 @@ function Work() {
                 <h3 className="font-serif text-5xl md:text-6xl font-bold text-white mb-3">{p.title}</h3>
                 <p className="text-white/40 text-sm font-bold uppercase tracking-widest mb-6">{p.cat}</p>
                 <div className="w-16 h-px bg-white/20 my-6" />
-                <a href="#" className="text-white/60 hover:text-white transition-colors text-sm tracking-wider inline-flex items-center gap-2">
-                  View Case Study <span>→</span>
+                <a href="/services" className="text-white/60 hover:text-white transition-colors text-sm tracking-wider inline-flex items-center gap-2">
+                  View Our Services <span>→</span>
                 </a>
                 <p className="text-white/30 text-xs mt-12">
                   {String(i + 1).padStart(2, "0")} / {String(projects.length).padStart(2, "0")}
@@ -737,6 +712,9 @@ function Services() {
                 <span className="text-white/20 font-serif text-5xl mb-12 block group-hover:text-white/40 transition-colors">{s.accent}</span>
                 <h3 className="font-serif text-3xl font-bold text-white mb-6">{s.title}</h3>
                 <p className="text-white/50 text-lg leading-relaxed flex-1">{s.desc}</p>
+                <div className="mt-8">
+                  <a href="/contact" className="text-white/40 hover:text-white transition-colors text-xs font-black uppercase tracking-[0.2em]">Start a Project →</a>
+                </div>
               </motion.div>
             </TiltCard>
           ))}
