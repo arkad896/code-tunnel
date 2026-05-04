@@ -1,12 +1,14 @@
 "use client";
 
 import React, { useState, useRef, useLayoutEffect, useEffect, useCallback } from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { Check, Palette, LayoutDashboard, Megaphone, Search, Zap, Wrench, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+const MotionLink = motion(Link);
 
 /**
  * @file page.tsx
@@ -91,30 +93,38 @@ function Navbar() {
 
   return (
     <>
-      <nav className={`fixed top-6 left-6 right-6 z-[100] transition-all duration-700 ${
-        scrolled 
-          ? "bg-white/5 backdrop-blur-2xl border border-white/10 py-4 px-8 rounded-2xl shadow-2xl" 
-          : "py-6 px-4 rounded-none"
-      }`}>
+      <nav
+        className={`fixed top-6 left-6 right-6 z-[100] transition-all duration-700 ${
+          scrolled
+            ? "bg-white/5 backdrop-blur-2xl border border-white/10 py-4 px-8 rounded-2xl shadow-2xl"
+            : "py-6 px-4 rounded-none"
+        }`}
+        role="navigation"
+        aria-label="Main navigation"
+      >
         <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <a href="/" className="flex items-center group">
-            <Image 
-              src="/logo.png" 
-              alt="Code Tunnel" width={200} height={50} 
-              className="h-12 w-auto transition-all duration-500 group-hover:scale-105" 
-              style={{ 
-                filter: isDark ? 'invert(1) hue-rotate(180deg)' : 'none' 
+          <Link href="/" className="flex items-center group">
+            <Image
+              src="/logo.png"
+              alt="Code Tunnel — Custom Web Development Agency in Kolkata"
+              width={200} height={50}
+              className="h-12 w-auto transition-all duration-500 group-hover:scale-105"
+              style={{
+                filter: isDark ? 'invert(1) hue-rotate(180deg)' : 'none'
               }}
             />
-          </a>
-          <div className="hidden md:flex gap-10">
+          </Link>
+          <div className="hidden md:flex gap-10" role="menubar">
             {navLinks.map(l => (
-              <a key={l.name} href={l.href} className={`text-xs font-black uppercase tracking-[0.2em] transition-colors duration-500 ${isDark ? 'text-white/50 hover:text-white' : 'text-zinc-900/50 hover:text-zinc-900'}`}>{l.name}</a>
+              <Link key={l.name} href={l.href} role="menuitem" className={`text-xs font-black uppercase tracking-[0.2em] transition-colors duration-500 ${isDark ? 'text-white/50 hover:text-white' : 'text-zinc-900/50 hover:text-zinc-900'}`}>{l.name}</Link>
             ))}
           </div>
-          <button 
+          <button
             onClick={() => setIsOpen(true)}
             className={`md:hidden p-2 rounded-lg transition-colors ${isDark ? 'text-white' : 'text-zinc-900'}`}
+            aria-label="Open navigation menu"
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
           >
             <Menu className="w-6 h-6" />
           </button>
@@ -124,18 +134,19 @@ function Navbar() {
       {/* Mobile Menu Drawer */}
       <AnimatePresence>
         {isOpen && (
-          <div className="fixed inset-0 z-[200] md:hidden">
+          <div id="mobile-menu" className="fixed inset-0 z-[200] md:hidden" role="dialog" aria-modal="true" aria-label="Mobile navigation menu">
             {/* Backdrop */}
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
               className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+              aria-hidden="true"
             />
-            
+
             {/* Drawer Panel */}
-            <motion.div 
+            <motion.div
               initial={{ x: "-100%" }}
               animate={{ x: 0 }}
               exit={{ x: "-100%" }}
@@ -143,38 +154,41 @@ function Navbar() {
               className="absolute top-0 left-0 bottom-0 w-[80%] max-w-sm bg-zinc-950 border-r border-white/10 p-8 flex flex-col shadow-2xl"
             >
               <div className="flex items-center justify-between mb-16">
-                <Image src="/logo.png" alt="Code Tunnel" width={200} height={50} className="h-10 w-auto invert brightness-0" />
-                <button 
+                <Image src="/logo.png" alt="Code Tunnel — Custom Web Development Agency in Kolkata" width={200} height={50} className="h-10 w-auto invert brightness-0" />
+                <button
                   onClick={() => setIsOpen(false)}
                   className="p-2 text-white/50 hover:text-white transition-colors"
+                  aria-label="Close navigation menu"
                 >
                   <X className="w-6 h-6" />
                 </button>
               </div>
 
-              <div className="flex flex-col gap-8">
-                {navLinks.map((l, i) => (
-                  <motion.a
-                    key={l.name}
-                    href={l.href}
-                    initial={{ x: -20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: i * 0.1 }}
-                    onClick={() => setIsOpen(false)}
-                    className="text-2xl font-serif font-bold text-white/70 hover:text-white transition-colors"
-                  >
-                    {l.name}
-                  </motion.a>
-                ))}
-              </div>
+              <nav aria-label="Mobile navigation links">
+                <div className="flex flex-col gap-8">
+                  {navLinks.map((l, i) => (
+                    <MotionLink
+                      key={l.name}
+                      href={l.href}
+                      initial={{ x: -20, opacity: 0 }}
+                      animate={{ x: 0, opacity: 1 }}
+                      transition={{ delay: i * 0.1 }}
+                      onClick={() => setIsOpen(false)}
+                      className="text-2xl font-serif font-bold text-white/70 hover:text-white transition-colors"
+                    >
+                      {l.name}
+                    </MotionLink>
+                  ))}
+                </div>
+              </nav>
 
-              <div className="mt-auto">
+              <nav aria-label="Social media links" className="mt-auto">
                 <p className="text-[10px] font-black uppercase tracking-[0.3em] text-white/20 mb-4">Socials</p>
                 <div className="flex gap-6">
                   <a href="https://linkedin.com/company/code-tunnel" className="text-white/40 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors">Instagram</a>
                   <a href="https://linkedin.com/company/code-tunnel" className="text-white/40 hover:text-white text-xs font-bold uppercase tracking-widest transition-colors">LinkedIn</a>
                 </div>
-              </div>
+              </nav>
             </motion.div>
           </div>
         )}
@@ -195,14 +209,14 @@ function FloatingPaths({ position }: { position: number }) {
     } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
       684 - i * 5 * position
     } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
-    color: `rgba(30, 27, 22, ${0.03 + i * 0.01})`, // Using charcoal color from our palette
+    color: `rgba(30, 27, 22, ${0.03 + i * 0.01})`,
     width: 0.4 + i * 0.02,
   }));
 
   return (
-    <div className="absolute inset-0 pointer-events-none">
+    <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
       <svg className="w-full h-full text-zinc-900" viewBox="0 0 696 316" fill="none">
-        <title>Background Paths</title>
+        <title>Decorative background pattern</title>
         {paths.map((path) => (
           <motion.path
             key={path.id}
@@ -229,7 +243,7 @@ function FloatingPaths({ position }: { position: number }) {
 }
 
 function Hero() {
-  const title = "Web Development Agency in Kolkata.";
+  const title = "Custom Web Development Agency in Kolkata.";
   const words = title.split(" ");
 
   return (
@@ -505,7 +519,8 @@ function Work() {
   useLayoutEffect(() => {
     if (!workSectionRef.current || !trackRef.current) return;
 
-    trackRef.current.style.willChange = "transform";
+    const trackEl = trackRef.current;
+    trackEl.style.willChange = "transform";
 
     const ctx = gsap.context(() => {
       // Header reveal
@@ -559,10 +574,10 @@ function Work() {
     }, workSectionRef);
 
     return () => {
-      if (trackRef.current) trackRef.current.style.willChange = "auto";
+      if (trackEl) trackEl.style.willChange = "auto";
       ctx.revert();
     };
-  }, []);
+  }, [projects.length]);
 
   return (
     <section
@@ -654,6 +669,8 @@ const TiltCard = React.forwardRef<
   const prefersReducedMotionRef = useRef(false);
   const isInteractiveRef = useRef(false);
   const [isInteractive, setIsInteractive] = useState(false);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const _unused = isInteractive;
   const willChangeTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   React.useImperativeHandle(ref, () => ({
@@ -1059,15 +1076,15 @@ function Contact() {
               <div className="space-y-3">
                 <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Your Name</label>
                 <input 
-                  type="text" required value={form.name} onChange={e => setForm({...form, name: e.target.value})}
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-white/30 transition-colors"
+                  type="text" required autoComplete="name" value={form.name} onChange={e => setForm({...form, name: e.target.value})}
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-white/30 transition-colors mobile-input"
                 />
               </div>
               <div className="space-y-3">
                 <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Email Address</label>
                 <input 
-                  type="email" required value={form.email} onChange={e => setForm({...form, email: e.target.value})}
-                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-white/30 transition-colors"
+                  type="email" required autoComplete="email" inputMode="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})}
+                  className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-white/30 transition-colors mobile-input"
                 />
               </div>
             </div>
@@ -1075,12 +1092,12 @@ function Contact() {
               <label className="text-[10px] font-black uppercase tracking-widest text-white/30">Project Details</label>
               <textarea 
                 rows={5} required value={form.msg} onChange={e => setForm({...form, msg: e.target.value})}
-                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-white/30 transition-colors resize-none"
+                className="w-full bg-white/5 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:border-white/30 transition-colors resize-none min-h-[120px]"
               />
             </div>
             <div className="flex justify-center pt-8">
               <MagneticWrapper strength={0.1}>
-                <button type="submit" className="px-16 py-6 bg-white text-black rounded-full font-black text-xs uppercase tracking-widest hover:scale-105 transition-transform">
+                <button type="submit" className="mobile-button bg-white text-black rounded-full font-black text-xs uppercase tracking-widest hover:scale-105 transition-transform">
                   Send Message
                 </button>
               </MagneticWrapper>
@@ -1215,26 +1232,28 @@ export default function Home() {
       <SkipLink />
       
       {/* GPU Cross-Fade Layer: cream surface fades out to reveal the #121212 wrapper */}
-      <div 
-        ref={creamLayerRef} 
-        className="fixed inset-0 z-0 bg-[#F7F4EF] will-change-opacity pointer-events-none" 
+      <div
+        ref={creamLayerRef}
+        className="fixed inset-0 z-0 bg-[#F7F4EF] will-change-opacity pointer-events-none"
+        aria-hidden="true"
       />
 
 
       <Navbar />
-      <main id="main-content" className="relative z-10">
+      <main id="main-content" aria-label="Main content">
         <Hero />
         <Work />
         
         {/* Cinematic Bridge Section */}
-        <section ref={bridgeRef} className="relative py-60 px-6 overflow-hidden z-10">
+        <section ref={bridgeRef} className="relative py-60 px-6 overflow-hidden z-10" aria-labelledby="bridge-heading">
           <div className="max-w-7xl mx-auto text-center">
+            <h2 id="bridge-heading" className="sr-only">Endless Possibilities</h2>
             <div className="font-serif text-5xl md:text-[10rem] font-bold text-white leading-none tracking-tighter mb-16">
               <div ref={infiniteRef} className="will-change-transform will-change-opacity">Infinite.</div>
               <span ref={possibleRef} className="italic text-white/30 block will-change-transform will-change-opacity">Possible.</span>
             </div>
             <div className="flex justify-center">
-               <div ref={lineRef} className="w-1 h-32 bg-gradient-to-b from-white to-transparent opacity-20 origin-top will-change-transform will-change-opacity" />
+               <div ref={lineRef} className="w-1 h-32 bg-gradient-to-b from-white to-transparent opacity-20 origin-top will-change-transform will-change-opacity" aria-hidden="true" />
             </div>
           </div>
         </section>
@@ -1279,10 +1298,11 @@ export default function Home() {
       <footer className="relative py-20 px-8 z-10 border-t border-white/5 bg-transparent">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 opacity-30 text-[10px] font-black uppercase tracking-[0.5em] text-white">
           <div className="flex items-center gap-4">
-            <Image 
-              src="/logo.png" 
-              alt="Code Tunnel" width={200} height={50} 
-              className="h-6 w-auto" 
+            <Image
+              src="/logo.png"
+              alt="Code Tunnel — Custom Web Development Agency in Kolkata"
+              width={200} height={50}
+              className="h-6 w-auto"
               style={{ filter: 'invert(1) hue-rotate(180deg)' }}
             />
             <span>Code Tunnel &bull; 2026</span>

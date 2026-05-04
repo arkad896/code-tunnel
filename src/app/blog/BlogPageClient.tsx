@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 
 interface BlogPageClientProps {
-  blogSchema: any;
+  blogSchema: Record<string, unknown>;
   posts: Array<{ title: string; excerpt: string; keyword: string }>;
 }
 
@@ -50,16 +50,17 @@ export default function BlogPageClient({ blogSchema, posts }: BlogPageClientProp
           animate="animate"
         >
           {posts.map((p, i) => (
-            <motion.article 
-              key={i} 
+            <motion.article
+              key={i}
               variants={staggerItem}
               className="bg-white/[0.03] border border-white/10 rounded-2xl p-8 flex flex-col justify-between hover:border-white/20 transition-all duration-300"
+              aria-labelledby={`blog-post-${i}-title`}
             >
               <div>
                 <span className="inline-flex items-center px-3 py-1 text-xs bg-white/10 rounded-full font-bold text-white/80 mb-6">
                   {p.keyword}
                 </span>
-                <h2 className="text-2xl font-serif font-bold text-white mb-4 leading-snug">
+                <h2 id={`blog-post-${i}-title`} className="text-2xl font-serif font-bold text-white mb-4 leading-snug">
                   {p.title}
                 </h2>
                 <p className="text-white/50 text-sm leading-relaxed mb-6">
@@ -70,8 +71,8 @@ export default function BlogPageClient({ blogSchema, posts }: BlogPageClientProp
                 <span className="text-[10px] font-black uppercase tracking-[0.2em] bg-white text-black px-2.5 py-1 rounded-sm">
                   Coming Soon
                 </span>
-                <a 
-                  href="/contact" 
+                <a
+                  href="/contact"
                   className="text-xs font-bold text-white hover:text-white/80 border-b border-white/20 pb-0.5"
                 >
                   Get a website that ranks

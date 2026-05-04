@@ -4,8 +4,9 @@ import SubFooter from "@/components/SubFooter";
 import BlogPageClient from "./BlogPageClient";
 
 export const metadata: Metadata = {
-  title: "Web Development Blog — Code Tunnel Kolkata",
-  description: "Insights on web development, React, Next.js, SEO, and digital strategy from the Code Tunnel team in Kolkata.",
+  title: "Web Development Blog — Custom Websites & Next.js Insights | Code Tunnel",
+  description: "Expert insights on web development, React, Next.js, SEO, and digital strategy from Code Tunnel — Kolkata's premier custom web development agency. Learn to build high-performing websites.",
+  keywords: ["web development blog", "Next.js tutorial", "React SEO tips", "custom website Kolkata"],
   alternates: {
     canonical: "https://codetunnel.co.in/blog",
   },

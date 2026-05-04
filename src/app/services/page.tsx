@@ -4,63 +4,61 @@ import SubFooter from "@/components/SubFooter";
 import ServicesPageClient from "./ServicesPageClient";
 
 export const metadata: Metadata = {
-  title: "Frontend Development & UX/UI Services in Kolkata — Code Tunnel",
-  description: "Code Tunnel provides elite frontend development, UX/UI design, and full-stack Next.js web applications. Custom React websites for businesses. Starting ₹24,999.",
+  title: "Web Development Services in Kolkata — Landing Pages, Business Sites & Custom Apps | Code Tunnel",
+  description: "Code Tunnel offers elite frontend development, UX/UI design, and full-stack Next.js web applications in Kolkata and across India. Custom React websites starting ₹24,999.",
+  keywords: ["web development services Kolkata", "landing page development India", "custom web application", "React developer Kolkata"],
   alternates: {
     canonical: "https://codetunnel.co.in/services",
   },
 };
 
-export default function ServicesPage() {
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How long does a website project take?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "A landing page typically takes 5–7 working days. A full website takes 3–4 weeks depending on scope and content availability."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do you work with clients outside Kolkata?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Code Tunnel works with clients across India. All communication via WhatsApp, email, and video calls."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What do I need to provide to get started?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Your brand assets (logo, colors), a rough idea of what you need, and your budget. We handle everything else."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Can you redesign my existing website?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. We offer full redesign and migration services for existing websites."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do you offer maintenance after launch?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. We offer monthly maintenance packages for updates, performance monitoring, and content changes."
-        }
-      }
-    ]
-  };
+import { Schema } from "@/components/Schema";
 
-  const servicesSchema = {
-    "@context": "https://schema.org",
+export default function ServicesPage() {
+  const faqData = [
+    {
+      "@type": "Question",
+      "name": "How long does a website project take?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A landing page typically takes 5–7 working days. A full website takes 3–4 weeks depending on scope and content availability."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you work with clients outside Kolkata?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. Code Tunnel works with clients across India. All communication via WhatsApp, email, and video calls."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "What do I need to provide to get started?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Your brand assets (logo, colors), a rough idea of what you need, and your budget. We handle everything else."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can you redesign my existing website?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We offer full redesign and migration services for existing websites."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer maintenance after launch?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes. We offer monthly maintenance packages for updates, performance monitoring, and content changes."
+      }
+    }
+  ];
+
+  const servicesData = {
     "@type": "ItemList",
     "itemListElement": [
       {
@@ -114,7 +112,9 @@ export default function ServicesPage() {
   return (
     <>
       <SubNavbar />
-      <ServicesPageClient faqSchema={faqSchema} servicesSchema={servicesSchema} />
+      <Schema type="FAQPage" data={faqData} />
+      <Schema type="Service" data={servicesData} />
+      <ServicesPageClient />
       <SubFooter />
     </>
   );

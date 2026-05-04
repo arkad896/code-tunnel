@@ -2,11 +2,7 @@
 
 import { motion } from "framer-motion";
 
-interface AboutPageClientProps {
-  professionalServiceSchema: any;
-}
-
-export default function AboutPageClient({ professionalServiceSchema }: AboutPageClientProps) {
+export default function AboutPageClient() {
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
@@ -29,11 +25,6 @@ export default function AboutPageClient({ professionalServiceSchema }: AboutPage
 
   return (
     <main className="min-h-screen bg-[#070707] text-white py-32 px-6 md:px-12 selection:bg-white selection:text-black">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(professionalServiceSchema) }}
-      />
-
       <div className="max-w-6xl mx-auto pt-20">
         {/* Header */}
         <motion.div 
@@ -230,23 +221,23 @@ export default function AboutPageClient({ professionalServiceSchema }: AboutPage
                 desc: "Complete web presence and immersive brand experience development for growing businesses across multiple verticals.",
               },
             ].map((item, idx) => (
-              <motion.div
-                key={idx}
-                variants={staggerItem}
-                className="bg-white/[0.02] border border-white/5 rounded-3xl p-8 hover:bg-white/5 hover:border-white/10 transition-all duration-500 flex flex-col justify-between"
-              >
-                <div>
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#8b6f4f] block mb-3">
-                    {item.client}
-                  </span>
-                  <h3 className="text-xl font-serif font-bold text-white mb-4">
-                    {item.title}
-                  </h3>
-                </div>
-                <p className="text-sm text-white/50 leading-relaxed font-light mt-auto">
-                  {item.desc}
-                </p>
-              </motion.div>
+              <motion.article
+              key={idx}
+              variants={staggerItem}
+              className="bg-white/[0.02] border border-white/5 rounded-3xl p-8 hover:bg-white/5 hover:border-white/10 transition-all duration-500 flex flex-col justify-between"
+            >
+              <div>
+                <span className="text-[10px] font-black uppercase tracking-[0.2em] text-[#8b6f4f] block mb-3">
+                  {item.client}
+                </span>
+                <h4 className="text-xl font-serif font-bold text-white mb-4">
+                  {item.title}
+                </h4>
+              </div>
+              <p className="text-sm text-white/50 leading-relaxed font-light mt-auto">
+                {item.desc}
+              </p>
+            </motion.article>
             ))}
           </motion.div>
         </div>

@@ -2,12 +2,7 @@
 
 import { motion } from "framer-motion";
 
-interface ServicesPageClientProps {
-  faqSchema: any;
-  servicesSchema: any;
-}
-
-export default function ServicesPageClient({ faqSchema, servicesSchema }: ServicesPageClientProps) {
+export default function ServicesPageClient() {
   const fadeInUp = {
     initial: { opacity: 0, y: 30 },
     whileInView: { opacity: 1, y: 0 },
@@ -51,15 +46,6 @@ export default function ServicesPageClient({ faqSchema, servicesSchema }: Servic
 
   return (
     <main className="min-h-screen bg-[#070707] text-white py-32 px-6 md:px-12 selection:bg-white selection:text-black">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(servicesSchema) }}
-      />
-
       <div className="max-w-6xl mx-auto pt-20">
         <motion.div 
           className="text-center mb-20"
@@ -103,90 +89,47 @@ export default function ServicesPageClient({ faqSchema, servicesSchema }: Servic
               )}
               
               <div>
-                <h3 className="text-xl font-serif font-bold text-white mb-2">{s.title}</h3>
-                <div className="flex items-baseline gap-1 mt-4 mb-6">
-                  <span className="text-3xl md:text-5xl font-serif font-black text-white">{s.price}</span>
-                  {s.price !== "Custom" && <span className="text-xs text-white/40 font-bold uppercase tracking-widest ml-1">Starts</span>}
+                <h3 className="text-2xl font-serif font-bold mb-4">{s.title}</h3>
+                <div className="mb-6">
+                  <span className="text-3xl font-bold">{s.price}</span>
+                  {s.price !== "Custom" && <span className="text-white/40 text-xs ml-2 uppercase tracking-tighter">Start</span>}
                 </div>
-                <p className="text-white/50 text-sm leading-relaxed mb-8">{s.desc}</p>
-                
-                <ul className="space-y-4 mb-8">
-                  {s.features.map((f, idx) => (
-                    <li key={idx} className="flex items-center gap-3 text-sm text-white/70">
-                      <svg className="w-4 h-4 text-[#8b6f4f] flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                      </svg>
+                <p className="text-white/50 text-sm leading-relaxed mb-8">
+                  {s.desc}
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                <div className="h-px bg-white/10 w-full mb-6" />
+                <ul className="space-y-3 mb-10">
+                  {s.features.map((f, fi) => (
+                    <li key={fi} className="flex items-center gap-3 text-xs text-white/70">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#8b6f4f]" />
                       {f}
                     </li>
                   ))}
                 </ul>
+                <a 
+                  href="/contact"
+                  className={`w-full py-4 rounded-xl text-[10px] font-black uppercase tracking-widest text-center transition-all ${
+                    i === 1 ? 'bg-[#8b6f4f] text-white hover:bg-[#a68d6d]' : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'
+                  }`}
+                >
+                  Initiate Project
+                </a>
               </div>
-
-              <a 
-                href="/contact" 
-                className={`w-full text-center py-4 rounded-xl font-bold uppercase text-xs tracking-widest transition-all ${
-                  i === 1 
-                    ? 'bg-white text-black hover:bg-white/90' 
-                    : 'bg-white/5 text-white border border-white/10 hover:bg-white/10 hover:border-white/20'
-                }`}
-              >
-                Secure This Plan
-              </a>
             </motion.div>
           ))}
         </motion.div>
 
-        {/* Our Process section */}
-        <div className="mb-32">
-          <motion.div className="text-center mb-16" {...fadeInUp}>
-            <h2 className="text-xs font-black uppercase tracking-[0.4em] text-[#8b6f4f]">
-              ENGINEERING LIFECYCLE
-            </h2>
-            <p className="text-3xl font-serif font-bold mt-2">
-              Our Process
-            </p>
-          </motion.div>
-
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-3 gap-8"
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="whileInView"
-            viewport={{ once: true }}
-          >
-            {[
-              {
-                title: "1. Discovery",
-                desc: "We understand your business, audience, and goals before writing a single line of code."
-              },
-              {
-                title: "2. Design & Build",
-                desc: "Custom UI, responsive layout, performance-first development from the ground up."
-              },
-              {
-                title: "3. Launch & Support",
-                desc: "Deployment, testing, and one month of post-launch support included."
-              }
-            ].map((p, idx) => (
-              <motion.div
-                key={idx}
-                variants={staggerItem}
-                className="bg-white/[0.02] border border-white/5 rounded-2xl p-8 hover:bg-white/[0.04] transition-all"
-              >
-                <h3 className="text-xl font-serif font-semibold text-white mb-4">{p.title}</h3>
-                <p className="text-white/50 text-sm leading-relaxed">{p.desc}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-
         {/* FAQ Section */}
         <div className="mb-32">
-          <motion.div className="mb-12 border-b border-white/5 pb-6" {...fadeInUp}>
-            <h2 className="text-xs font-black uppercase tracking-[0.4em] text-[#8b6f4f]">
-              INFORMATION TRANSPARENCY
-            </h2>
-            <p className="text-3xl font-serif font-bold mt-2">
+          <motion.div 
+            className="text-center mb-16"
+            {...fadeInUp}
+          >
+            <h2 className="text-3xl font-serif font-bold mb-4">Common Inquiries</h2>
+            <p className="text-white/40 text-xs uppercase tracking-[0.3em]">
               Frequently Asked Questions
             </p>
           </motion.div>
@@ -220,14 +163,14 @@ export default function ServicesPageClient({ faqSchema, servicesSchema }: Servic
                 a: "Yes. We offer monthly maintenance packages for updates, performance monitoring, and content changes."
               }
             ].map((faq, idx) => (
-              <motion.div
+              <motion.article
                 key={idx}
                 variants={staggerItem}
                 className="bg-white/[0.01] border border-white/5 rounded-2xl p-6 hover:border-white/10 transition-all"
               >
-                <p className="text-base font-bold text-white mb-2">{faq.q}</p>
+                <h3 className="text-base font-bold text-white mb-2">{faq.q}</h3>
                 <p className="text-white/60 text-sm leading-relaxed">{faq.a}</p>
-              </motion.div>
+              </motion.article>
             ))}
           </motion.div>
         </div>
